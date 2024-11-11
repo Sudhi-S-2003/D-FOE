@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { useFormData } from "@/context/FormDataContext";
+import Forminterface from "@/data/Forminterface";
 
 enum Sizes {
   basic = "round",
@@ -31,6 +33,28 @@ const button: Form[] = [
 
 function ButtonBox() {
   const [activeItem, setActiveItem] = useState<string>("");
+  const { setFormData } = useFormData();
+  const handleApply = () => {
+    if (!activeItem) return; // Prevent applying if no item is selected
+
+    const [color, size] = activeItem.split("-");
+    setFormData((prev: Forminterface) => ({
+      ...prev,
+      components: [
+        ...prev.components,
+        {
+          no: prev.components.length + 1,
+          label: "",
+          type: "button",
+          placeholder: "",
+          option: [],
+          style: [{ color: color, size: size }],
+          other: {},
+        },
+      ],
+    }));
+    setActiveItem("")
+  };
 
   const handleClick = (item: Form) => {
     setActiveItem(`${item.color}-${item.size}`);
@@ -51,7 +75,14 @@ function ButtonBox() {
         >
           {item.color} - {item.size}
         </button>
+
       ))}
+      <button
+        onClick={() => handleApply()}
+        disabled={!activeItem} className="bg-green-600 m-3 p-3"
+      >
+        Apply
+      </button>
     </div>
   );
 }

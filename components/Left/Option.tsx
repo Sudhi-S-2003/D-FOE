@@ -1,17 +1,37 @@
 "use client";
 import { useState } from "react";
-
+import { useFormData } from "@/context/FormDataContext";
+import Forminterface from "@/data/Forminterface";
 interface Option {
     label: string;
     value: string;
 }
 
-function Options() {
+function Options({ type }: { type: string }) {
     const [options, setOptions] = useState<Option[]>([]);
     const [newOption, setNewOption] = useState<{ label: string; value: string }>({
         label: "",
         value: "",
     });
+    const { setFormData } = useFormData();
+    const handleApply = () => {
+        setFormData((prev: Forminterface) => ({
+            ...prev,
+            components: [
+                ...prev.components,
+                {
+                    no: prev.components.length + 1,
+                    label: "",
+                    type: type,
+                    placeholder: "",
+                    option: [options],
+                    style: [],
+                    other: {},
+                },
+            ],
+        }));
+        setOptions([])
+    };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
         setNewOption({ ...newOption, [field]: e.target.value });
@@ -62,6 +82,13 @@ function Options() {
                     ))}
                 </ul>
             </div>
+            <button
+                onClick={handleApply}
+                disabled={options.length === 0}
+                className="bg-green-600 m-3 p-3"
+            >
+                Apply
+            </button>
         </div>
     );
 }

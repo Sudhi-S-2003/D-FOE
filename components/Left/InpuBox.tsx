@@ -1,30 +1,32 @@
 "use client";
 import { useState } from "react";
-
+import Placeholder from "./Placeholder";
 enum Sizes {
   lg = "lg",
   md = "md",
   sm = "sm",
 }
-
+enum Name {
+  text = "text",
+  number = "number",
+  email = "email",
+}
 interface Form {
-  name: string;
+  name: Name;
   size: Sizes;
 }
-
 const text: Form[] = [
-  ...Object.values(Sizes).map((size) => ({
-    name: "text-input",
-    size: size,
-  })),
-  ...Object.values(Sizes).map((size) => ({
-    name: "number-input",
-    size: size,
-  })),
+  ...Object.values(Name).flatMap((name) =>
+    Object.values(Sizes).map((size) => ({
+      name: name,
+      size: size,
+    }))
+  ),
 ];
 
 function InputBox() {
   const [activeItem, setActiveItem] = useState<string>("");
+
 
   const handleClick = (item: Form) => {
     setActiveItem(`${item.name}-${item.size}`);
@@ -35,13 +37,14 @@ function InputBox() {
       {text.map((item, index) => (
         <button
           key={index}
-          className={`bg-red-400 m-3 p-3 hover:scale-95 ${activeItem === `${item.name}-${item.size}` ? "bg-green-400 scale-105" : ""
+          className={`m-3 p-3 hover:scale-95 ${activeItem === `${item.name}-${item.size}` ? "bg-green-400 scale-105" : "bg-red-400"
             }`}
           onClick={() => handleClick(item)}
         >
           {item.name} - {item.size}
         </button>
       ))}
+      <Placeholder activeItem={activeItem} />
     </div>
   );
 }

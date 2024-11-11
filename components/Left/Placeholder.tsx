@@ -1,11 +1,35 @@
 "use client";
 import { useState } from "react";
-
-function Placeholder() {
+import { useFormData } from "@/context/FormDataContext";
+import Forminterface from "@/data/Forminterface";
+function Placeholder({ activeItem }: { type: string }) {
     const [form, setForm] = useState<{ placeholder: string; label: string }>({
         placeholder: "",
         label: "",
     });
+    const { setFormData } = useFormData();
+    const handleApply = () => {
+        if (!activeItem) return; // Prevent applying if no item is selected
+
+        const [name, size] = activeItem.split("-");
+        setFormData((prev: Forminterface) => ({
+            ...prev,
+            components: [
+                ...prev.components,
+                {
+                    no: prev.components.length + 1,
+                    label: form.label,
+                    type: name,
+                    placeholder: form.placeholder,
+                    option: [],
+                    style: [{ size: size }],
+                    other: {},
+                },
+            ],
+        }));
+        setForm({ placeholder: "", label: "" });
+
+    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -35,6 +59,12 @@ function Placeholder() {
             />
             {form.placeholder && <p>Placeholder: {form.placeholder}</p>}
             {form.label && <p>Label: {form.label}</p>}
+            <button
+                onClick={() => handleApply()}
+                disabled={!activeItem} className="bg-green-600 m-3 p-3"
+            >
+                Apply
+            </button>
         </div>
     );
 }

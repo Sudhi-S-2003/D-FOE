@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-
+import { useFormData } from "@/context/FormDataContext"; 
+import Forminterface from "@/data/Forminterface";
 enum Name {
   gray = "gray",
   white = "white",
@@ -30,9 +31,17 @@ console.log(other);
 
 function BackgroundColorBox() {
   const [activeItem, setActiveItem] = useState<string>("");
+  const { setFormData } = useFormData(); 
 
   const handleClick = (item: { name: string; opacity: number }) => {
     const uniqueKey = `${item.name}-${item.opacity}`;
+    setFormData((prev: Forminterface) => ({
+      ...prev,
+      basic: {
+        ...prev.basic,
+        bgColor: uniqueKey,  
+      },
+    }));
     setActiveItem(uniqueKey);
   };
 

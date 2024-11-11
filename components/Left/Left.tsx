@@ -6,7 +6,7 @@ import TextColorBox from "./TextColorBox";
 import BackgroundColorBox from './BackgroundColorBox';
 import Preview from "./Preview";
 import Placeholder from "./Placeholder";
-import Options from "./Option";
+import SubmitBtn from "./SubmitBtn";
 function Left() {
   return (
     <div className="w-[50%] p-5">
@@ -24,10 +24,7 @@ function Left() {
       <ButtonBox />
       <h1 className="text-lg pl-2 underline mb-2">Other Box</h1>
       <OtherBox />
-      <h1 className="text-lg pl-2 underline mb-2">Enter placeholder and Label</h1>
-      <Placeholder />
-      <h1 className="text-lg pl-2 underline mb-2">Enter Option for Other Box</h1>
-      <Options />
+      <SubmitBtn/>
     </div>
   );
 }

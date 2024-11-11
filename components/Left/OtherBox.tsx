@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Options from "./Option";
 
 enum Name {
   radio = "Radio",
@@ -38,6 +39,7 @@ function OtherBox() {
           {item.label}
         </button>
       ))}
+      <Options type={activeItem} />
     </div>
   );
 }
