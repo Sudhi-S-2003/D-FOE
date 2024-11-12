@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Placeholder from "./Placeholder";
 enum Sizes {
+  xl="xl",
   lg = "lg",
   md = "md",
   sm = "sm",
@@ -10,6 +11,7 @@ enum Name {
   text = "text",
   number = "number",
   email = "email",
+  password="password"
 }
 interface Form {
   name: Name;

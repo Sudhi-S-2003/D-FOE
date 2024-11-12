@@ -3,9 +3,9 @@ import { useState } from "react";
 import Options from "./Option";
 
 enum Name {
-  radio = "Radio",
-  checkbox = "Checkbox",
-  select = "Select"
+  radio = "radio",
+  checkbox = "checkbox",
+  select = "select"
 }
 
 interface Form {

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-
+import { useFormData } from "@/context/FormDataContext"; 
+import Forminterface from "@/data/Forminterface";
 enum Sizes {
     sm = "sm",
     lg = "lg",
@@ -30,10 +31,18 @@ const text: Form[] = [
 
 function TextBox() {
     const [activeItem, setActiveItem] = useState<string>("");
+    const { setFormData } = useFormData(); 
 
     const handleClick = (item: Form) => {
         const itemIdentifier = `${item.name}-${item.size}`;
         setActiveItem(activeItem === itemIdentifier ? "" : itemIdentifier);
+        setFormData((prev: Forminterface) => ({
+            ...prev,
+            basic: {
+              ...prev.basic,
+              label: itemIdentifier,  
+            },
+          }));
     };
 
     return (

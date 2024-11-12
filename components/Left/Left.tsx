@@ -5,7 +5,6 @@ import TextBox from "./TextBox";
 import TextColorBox from "./TextColorBox";
 import BackgroundColorBox from './BackgroundColorBox';
 import Preview from "./Preview";
-import Placeholder from "./Placeholder";
 import SubmitBtn from "./SubmitBtn";
 function Left() {
   return (

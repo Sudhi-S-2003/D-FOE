@@ -6,7 +6,7 @@ function HomePage() {
   return (
     <div className="flex flex-col">
       <Header />
-      <div className="flex flex-row bg-slate-600">
+      <div className="flex flex-row bg-slate-600  p-3  h-[95vh] overflow-y-auto">
         <FormDataProvider>
           <Left />
           <Right />

@@ -17,6 +17,7 @@ export const FormDataProvider: React.FC<{ children: ReactNode }> = ({ children }
       color: "",
       width: "",
       height: "",
+      label: "",
       other: {},
     },
     count: 0,
@@ -39,4 +40,8 @@ export const useFormData = () => {
     throw new Error("useFormData must be used within a FormDataProvider");
   }
   return context;
+};
+export const getFormData = () => {
+  const { formData } = useFormData(); 
+  return formData;
 };

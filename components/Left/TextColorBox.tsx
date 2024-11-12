@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
-
+import { useFormData } from "@/context/FormDataContext"; 
+import Forminterface from "@/data/Forminterface";
 enum Name {
     gray = "gray",
-    stone = "stone",
+    white = "white",
     orange = "orange",
     lime = "lime",
 }
@@ -30,10 +31,18 @@ console.log(other);
 
 function TextColorBox() {
     const [activeItem, setActiveItem] = useState<string>("");
+    const { setFormData } = useFormData(); 
 
     const handleClick = (item: { name: string; opacity: number }) => {
         const uniqueKey = `${item.name}-${item.opacity}`;
         setActiveItem(uniqueKey);
+        setFormData((prev: Forminterface) => ({
+            ...prev,
+            basic: {
+              ...prev.basic,
+              color: uniqueKey,  
+            },
+          }));
     };
 
     return (

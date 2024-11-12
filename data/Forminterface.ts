@@ -12,7 +12,8 @@ interface Basic {
     color: string;
     width: string;
     height: string;
-    other: Other;
+    label:string,
+    others: Other;
 }
 
 interface Component {
@@ -20,8 +21,8 @@ interface Component {
     label: string;
     type:string,
     placeholder: string;
-    option: Option[];  
-    style: Option[];      
+    options: Option[];  
+    styles: Option[];      
     other: Other;
 }
 

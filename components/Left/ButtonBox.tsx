@@ -14,7 +14,7 @@ enum Color {
   red = "red",
   blue = "blue",
   green = "green",
-  orange = "orange",
+  indigo = "indigo",
 }
 
 interface Form {
@@ -33,6 +33,7 @@ const button: Form[] = [
 
 function ButtonBox() {
   const [activeItem, setActiveItem] = useState<string>("");
+  const [activetext, setActiveText] = useState<string>("")
   const { setFormData } = useFormData();
   const handleApply = () => {
     if (!activeItem) return; // Prevent applying if no item is selected
@@ -44,16 +45,20 @@ function ButtonBox() {
         ...prev.components,
         {
           no: prev.components.length + 1,
-          label: "",
+          label: activetext,
           type: "button",
           placeholder: "",
-          option: [],
-          style: [{ color: color, size: size }],
+          options: [],
+          styles: [{ color: color, size: size }],
           other: {},
         },
       ],
     }));
     setActiveItem("")
+    setActiveText("")
+  };
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setActiveText(e.target.value);
   };
 
   const handleClick = (item: Form) => {
@@ -77,9 +82,16 @@ function ButtonBox() {
         </button>
 
       ))}
+      <input
+        type="text"
+        name="placeholder"
+        placeholder="Enter Button name"
+        className="p-2 border border-gray-300 rounded-md mt-2 text-black"
+        onChange={(e) => handleInput(e)}
+      />
       <button
         onClick={() => handleApply()}
-        disabled={!activeItem} className="bg-green-600 m-3 p-3"
+        disabled={!activeItem || !activetext} className="bg-green-600 m-3 p-3"
       >
         Apply
       </button>

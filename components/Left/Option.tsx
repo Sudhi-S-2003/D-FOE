@@ -24,7 +24,7 @@ function Options({ type }: { type: string }) {
                     label: "",
                     type: type,
                     placeholder: "",
-                    option: [options],
+                    options: options,
                     style: [],
                     other: {},
                 },
