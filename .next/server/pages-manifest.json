@@ -1,1 +1,11 @@
-{}
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/users": "pages/users.js",
+  "/users/[id]": "pages/users/[id].js",
+  "/users/[id]/edit": "pages/users/[id]/edit.js",
+  "/api/users/[id]": "pages/api/users/[id].js",
+  "/api/users": "pages/api/users.js",
+  "/users/new": "pages/users/new.js"
+}
